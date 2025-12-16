@@ -58,5 +58,5 @@ jobs:
       - name: Upload files
         shell: bash
         run: >-
-          aws s3 sync --delete "${{ inputs.path }}" "s3://${{ inputs.bucket }}" \
+          aws s3 sync --delete --no-follow-symlinks "${{ inputs.path }}" "s3://${{ inputs.bucket }}" \
              ${{ inputs.sync-args }}
