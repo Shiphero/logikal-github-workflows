@@ -54,6 +54,9 @@ jobs:
         with:
           aws-region: ${{ inputs.region }}
           role-to-assume: ${{ inputs.uploader-role }}
-      
-      - name: Upload files to s3
-        run: aws s3 sync --delete --debug "${{ inputs.path }}" "s3://${{ inputs.bucket }}" ${{ inputs.sync-args }}
+
+      - name: Upload files
+        shell: bash
+        run: >-
+          aws s3 sync --delete --debug --no-follow-symlinks "${{ inputs.path }}" "s3://${{ inputs.bucket }}" \
+             ${{ inputs.sync-args }}
